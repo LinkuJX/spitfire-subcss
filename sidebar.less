@@ -1,0 +1,941 @@
+@import (reference) "style";
+
+// Helpers
+
+.side-header-case-fix() {
+	text-transform: lowercase;
+	
+	&:first-letter {
+		text-transform: uppercase;
+	}
+}
+
+.side-sandwich-border() {
+	border-top: 1px solid @side-border-color;
+	border-bottom: 1px solid @side-border-color;
+}
+
+.side-fancy-button-bg() {
+	background: @submit-bg !important;
+	
+	border-radius: 5px !important;
+	outline: 1px dotted @submit-bg;
+	border: 1px solid @color-spitfire1-darker;
+	
+	transition: outline @transition-time ease;
+}
+
+.side-fancy-button-hover-bg() {
+	outline: 1px solid @submit-hover-color !important;
+}
+
+.side-fancy-button-text(@size: 18px) {
+	text-align: center;
+	font-family: @header-font-family;
+	font-weight: normal;
+	font-size: @size;
+	letter-spacing: 1px;
+	color: @submit-color !important;
+}
+
+.side-fancy-link() {
+	background-color: @side-button-bg;
+	border: 1px solid @side-button-border-color;
+	color: @color-light-gray !important;
+
+	&:hover {
+		background-color: @side-button-bg-hover;
+	}
+}
+
+.side-fancy-link-hover-text() {
+	color: @side-button-color-hover;
+}
+
+.side-dark-textfield() {
+	background-color: @side-field-bg !important;
+	border: 1px solid @side-field-border !important;
+	
+	color: @side-field-color;
+	
+	transition: border-color @transition-time ease;
+	
+	&:focus {
+		border-color: @color-blue !important;
+	}
+}
+
+// Subreddit info
+.linkinfo {
+	@info-size: 14px;
+	
+	position: relative;		// For z-index
+	z-index: 3;
+	
+	margin-top: -13px;
+	margin-bottom: 13px;
+	
+	background-color: @tabs-bg !important;
+	border: none;
+	border-radius: 0;
+	
+	text-align: center;
+	font-size: @info-size;
+	
+	// RES makes this too complicated
+	* {
+		color: @side-color !important;
+	}
+	
+	.date {
+		margin-bottom: @side-padding !important;
+	}
+	
+	.score * {
+		color: @side-highlight-color !important;
+	}
+	
+	.totalvotes * {
+		font-size: @info-size;
+	}
+	
+	.upvotes * {
+		font-size: @info-size;
+		color: rgb(205, 69, 0) !important;
+	}
+	
+	.downvotes * {
+		font-size: @info-size;
+		color: rgb(95, 153, 207) !important;
+	}
+	
+	.shortlink {
+		font-size: 0;
+		
+		margin-top: @side-padding + 2px;
+		margin-bottom: @side-padding;
+		
+		input {
+			.side-dark-textfield();
+			
+			font-size: 13px;
+		}
+	}
+}
+
+.titlebox {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	
+	margin-top: 42px;
+	padding: 0 @side-padding @side-padding;
+	
+	color: @side-highlight-color;
+	
+	// Hide some elements
+	.redditname,
+	.leavemoderator {
+		display: none;
+	}
+	
+	// Fit elements to the width of the title box so they can be slid up and down
+	> * {
+		width: 100%;
+	}
+	
+	// Subscriber and current users
+	.subscribers,
+	.users-online {
+		order: 0;
+		height: 22px;
+		
+		text-align: center;
+	}
+	
+	.subscribers {
+		font-size: 16px;
+		
+		&:after {
+			content: @side-user-text;
+		}
+		
+		.word {
+			display: none;
+		}
+	}
+
+	.users-online {
+		font-size: 14px;
+		
+		&:before {
+			display: none;
+		}
+		
+		&:after {
+			content: "@{side-online-text}";
+		}
+		
+		.word {
+			display: none;
+		}
+	}
+	
+	// Subscribe buttons (RES wraps in .subButtons)
+	.subscribe-button {
+		order: 1;
+		text-align: center;
+		
+		a {
+			width: 130px;
+		}
+	}
+	
+	.subscribe-button a.active,					// Normal subscribe button
+	.subButtons span:not(.subscribe-button) {	// RES subscribe buttons (+shortcut, +dashboard)
+		display: inline-block;
+		width: 83px;
+		line-height: 21px;
+		
+		.side-fancy-button-bg();
+		.side-fancy-button-text(13px);
+		
+		padding: 0 3px;
+		
+		text-transform: capitalize;
+		
+		&:hover {
+			.side-fancy-button-hover-bg();
+		}
+	}
+	
+	.subButtons :last-child {
+    		margin-right: 0;
+	}
+	
+	> .subscribe-button a.active {
+		width: 160px;
+	}
+	
+	// Configure RES's wrapper around sub buttons
+	.subButtons {
+		order: 1;
+		height: 24px;
+		
+		margin-bottom: 5px;
+		
+		text-align: center;
+	}
+	
+	// Button options
+	form.toggle {
+		order: 2;
+		height: 18px;
+		vertical-align: middle;
+		
+		padding: 2px 0 2px 0;
+		
+		background: none;
+		
+		font-size: 11px;
+		color: @side-color !important;
+		
+		label,
+		input {
+			margin-top: 0;
+			vertical-align: middle;
+		}
+	}
+	
+	form.leavecontributor-button {
+		order: 2;
+		height: 24px;
+	}
+	
+	.tagline {
+		order: 2;
+		height: 12px;
+		margin: 2px 0 0 20px;
+		
+		font-size: 12px;
+		color: @side-color !important;
+	}
+	
+	.flairselector {
+		left: unset !important;
+		right: 0 !important;
+	}
+	
+	.flairselectbtn:after {
+		content: "flair";
+		margin-left: 3px;
+	}
+	
+	// Move main content to bottom
+	.usertext {
+		order: 3;
+	}
+}
+
+// Main stuff
+.side {
+	margin: 0 @content-padding 0 0;
+	
+	background-color: @side-bg !important;
+	border-right: 1px solid @color-dark-gray !important;
+	border-bottom: 1px solid @color-dark-gray !important;
+	
+	// Adjust layout of containers
+	.md-container {
+		margin: @side-md-top-margin -@side-padding 0 -@side-padding;
+	}
+	
+	.md-section {
+		margin-left: @side-padding;
+		margin-right: @side-padding;
+	}
+	
+	// Search
+	#search {
+		position: relative;
+		
+		z-index: 999;
+		
+		margin: -@spacer-margin-top @search-padding 0 0;
+		
+		input[type="submit"] {
+			margin-left: -28px;
+			
+			background-image: url(%%sprite-reddit%%) !important;
+			background-position: -20px -838px !important;
+			background-color: transparent !important;
+		}
+		
+		input[type="text"] {
+			.side-dark-textfield();
+			
+			width: @search-width;
+			height: @search-height;
+			
+			margin: @search-padding;
+			padding: 3px 0px;
+			
+			font-size: 14px;
+			text-indent: 6px;
+			
+			&:focus {
+				border-bottom-style: none !important;
+			}
+		}
+	}
+	
+	#searchexpando {
+		width: @search-width - 20px - 2px;
+		
+		position: absolute;
+		top: @search-height;
+		left: 6px;
+		z-index: 1;
+		
+		background-color: @side-field-bg;
+		border-top: none;
+		border-color: @side-field-border !important;
+		border-radius: 0;
+		
+		transition: border-color @transition-time ease;
+		
+		label {
+			color: @color-light-gray;
+		}
+		
+		p {
+			margin: 6px 0 4px 0px;
+			
+			font-size: smaller;
+		}
+	}
+	
+	#search input[type="text"]:focus ~ #searchexpando {
+		border-color: @color-blue !important;
+	}
+	
+	// Randomly appearing sponsorship box really messes things up
+	.sponsorshipbox {
+		position: relative;
+		z-index: 3;
+		
+		margin-top: -(@spacer-margin-top + 6px);
+		//padding-bottom: 5px;
+		
+		background-color: @tabs-bg;
+	}
+	
+	// Mod-editable markdown area
+	.md {
+		overflow: visible;
+		
+		color: @side-color;
+		
+		// Default markdown element styling
+		ul, ol {
+			padding-left: 0;
+		}
+		
+		li {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+		
+		blockquote {
+			position: relative;
+			
+			margin: 0;
+			padding: 0;
+			
+			border-left: none;
+		}
+		
+		> p {
+			text-align: center;
+			
+			a {
+				.side-fancy-link();
+				
+				display: inline-block;
+				width: @side-width - @content-padding-total - 2px;
+				
+				border-radius: 6px;
+
+				padding: (@content-padding - 2px) 0;
+				
+				transition: background-color @transition-time linear, color @transition-time linear;
+				
+				&:hover {
+					.side-fancy-link-hover-text();
+				}
+				
+				// Speicific links
+				&[href$="#rules"] {
+					margin-top: 8px;
+				}
+			}
+		}
+		
+		// Section headers
+		> h1, > h2, > h3, > h4 {
+			line-height: @side-header-height;
+			margin: @content-padding 0;
+			
+			background: url(%%header-bg%%) repeat-x;
+			
+			color: @side-header-color;
+			font-family: @header-font-family;
+			font-size: @side-header-size;
+			font-weight: normal;
+			text-align: center;
+		}
+		
+		// Marks auto-generated area
+		> h5, > h6 {
+			display: none;
+		}
+		
+		// Announcements
+		h1 + ol {
+			&:extend(.side .md-section);
+			
+			list-style: none;
+			
+			li {
+				.side-fancy-link();
+				
+				margin-bottom: 4px;
+				padding: 5px 6px;
+				
+				transition: background-color @transition-time linear;
+				
+				a {
+					color: @color-white !important;
+					transition: color @transition-time linear;
+				}
+				
+				&:hover {
+					a {
+						.side-fancy-link-hover-text();
+					}
+				}
+			}
+		}
+		
+		// Theme select
+		h3 + blockquote {
+			&:extend(.side .md-section);
+			
+			p {
+				text-align: center;
+				
+				// Nightmode message
+				a {
+					color: @color-light-gray !important;
+				}
+				
+				// Buttons
+				&:first-child a {
+					display: inline-block;
+					width: 80px;
+					height: 80px;
+					
+					margin: 0 20px;
+					
+					background-image: url(%%theme-buttons%%);
+					
+					&:hover {
+						//border-color: rgb(200, 200, 200);
+						//box-shadow: 0 0 4px 1px rgba(200, 200, 200, 0.4);
+					}
+					
+					// Light theme button
+					&:first-child {
+						margin-right: -3px;
+						
+						background-position: 0 0;
+					}
+					
+					// Dark theme button
+					&:last-child {
+						background-position: -80px 0;
+					}
+				}
+			}
+		}
+		
+		// Events
+		h4 + table {
+			tr:nth-child(n+1) td:nth-child(2) strong {
+				//animation: live-glow 2.0s infinite alternate ease-in-out;
+				//transform: translateZ(0);
+				text-shadow: 0 0 4px @color-blue;
+			}
+			
+			//@keyframes live-glow {
+			//	from {
+			//        text-shadow: 0 0 4px darken(@color-blue, 50%);
+			//    }
+			//	to {
+			//        text-shadow: 0 0 4px @color-blue;
+			//    }
+			//}
+		}
+		
+		// Main menu
+		/*h5 + blockquote {
+			display: none;
+		}*/
+	}
+	
+	// Promo image
+	a[href$="#promo"] {
+		@promo-height: image-height(@promo-img);
+		@promo-offset-base: @promo-height + @side-md-top-margin;	// 194px
+		
+		width: 300px;
+		height: @promo-height;
+		
+		position: absolute;
+		left: 0;
+		
+		background-image: url(%%promo%%);
+		.side-sandwich-border();
+		
+		opacity: 0.85;
+		transition: opacity @transition-time linear;
+		
+		&:hover {
+			opacity: 1;
+		}
+		
+		// Position adjustments based on login and RES states
+		// This should *really* be done a different way.
+		@res-add: 22px;
+		@gold-add: 22px;
+		@chrome-add: -5px;
+		
+		@top: 87px;
+		@loggedin: 123px;
+		@contributor: 142px;
+		
+		top: -(@promo-offset-base + @top);
+		
+		.res & {
+			top: -(@promo-offset-base + @top + @res-add);
+		}
+		
+		.loggedin & {
+			top: -(@promo-offset-base + @loggedin);
+		}
+		.loggedin.res & {
+			top: -(@promo-offset-base + @loggedin + @res-add);
+		}
+		.loggedin.gold & {
+			top: -(@promo-offset-base + @loggedin + @gold-add);
+		}
+		.loggedin.res.gold & {
+			top: -(@promo-offset-base + @loggedin + @res-add + @gold-add);
+		}
+		
+		.contributor & {
+			top: -(@promo-offset-base + @contributor);
+		}
+		.contributor.res & {
+			top: -(@promo-offset-base + @contributor + @res-add);
+		}
+		.contributor.gold & {
+			top: -(@promo-offset-base + @contributor + @gold-add);
+		}
+		.contributor.res.gold & {
+			top: -(@promo-offset-base + @contributor + @res-add + @gold-add);
+		}
+		
+		// Dammit, Chrome. Why is your text rendering so bad?
+		@media screen and (-webkit-min-device-pixel-ratio:0) {
+			top: -(@promo-offset-base + @chrome-add + @top);
+			
+			.res & {
+				top: -(@promo-offset-base + @chrome-add + @top + @res-add);
+			}
+			
+			.loggedin & {
+				top: -(@promo-offset-base + @chrome-add + @loggedin);
+			}
+			.loggedin.res & {
+				top: -(@promo-offset-base + @chrome-add + @loggedin + @res-add);
+			}
+			.loggedin.gold & {
+				top: -(@promo-offset-base + @chrome-add + @loggedin + @gold-add);
+			}
+			.loggedin.res.gold & {
+				top: -(@promo-offset-base + @chrome-add + @loggedin + @res-add + @gold-add);
+			}
+			
+			.contributor & {
+				top: -(@promo-offset-base + @chrome-add + @contributor);
+			}
+			.contributor.res & {
+				top: -(@promo-offset-base + @chrome-add + @contributor + @res-add);
+			}
+			.contributor.gold & {
+				top: -(@promo-offset-base + @chrome-add + @contributor + @gold-add);
+			}
+			.contributor.res.gold & {
+				top: -(@promo-offset-base + @chrome-add + @contributor + @res-add + @gold-add);
+			}
+		}
+	}
+	
+	// Hide the "who made it/age" section
+	.bottom {
+		display: none;
+	}
+	
+	// Bottom ad area
+	#ad_main {
+		//.side-sandwich-border();
+	}
+}
+
+// Bottom boxes
+.sidecontentbox {
+	display: flex;
+	flex-direction: column;
+	
+	margin: 10px;
+	padding: 5px;
+	
+	background-color: @side-button-bg;
+	border: 1px solid @side-button-border-color;
+	
+	.title {
+		order: 0;
+		
+		text-align: center;
+		
+		h1 {
+			display: inline-block;
+			.side-header-case-fix();
+			
+			font-weight: normal;
+			letter-spacing: 1px;
+			color: @side-header-color;
+		}
+	}
+	
+	.content {
+		order: 2;
+		
+		border: none;
+	}
+	
+	// Large mod message button
+	a.helplink {
+		order: 1;
+		
+		display: block;
+		
+		margin: 4px 2px;
+		padding: 6px 0;
+		
+		.side-fancy-button-bg();
+		.side-fancy-button-text(17px);
+		
+		.side-header-case-fix();
+		
+		&:hover {
+			.side-fancy-button-hover-bg();
+		}
+		
+		&::after {
+		    content: "(this is a button)";
+		    display: block;
+		    font-size: 10px;
+		    height: 11px;
+		}
+	}
+}
+
+// Login
+.login-form-side {
+	position: relative;		// To cover lock
+	z-index: 3;
+	
+	margin-top: -@spacer-margin-top - 6px;
+	
+	background-color: @tabs-bg !important;
+	border: none;
+	
+	color: @side-color !important;
+	
+	input {
+		.side-dark-textfield();
+		
+		&[type="text"] {
+			margin-left: 6px;
+		}
+		
+		&[type="password"] {
+			margin-left: 4px;
+		}
+	}
+	
+	button {
+		.side-fancy-button-bg();
+		.side-fancy-button-text(14px);
+		
+		&:hover {
+			.side-fancy-button-hover-bg();
+		}
+		
+		margin: 0 4px 4px 0;
+		padding: 2px 10px;
+	}
+	
+	#remember-me {
+		margin-left: 7px;
+	}
+	
+	.g-recaptcha {
+		margin-top: 6px;
+	}
+}
+
+// Submit buttons
+.submit {
+	&.sidebox {
+		// Only show for logged-in users
+		display: none;
+		.loggedin & {
+			display: inherit;
+		}
+		
+		margin-top: -@spacer-margin-top - 6px;
+	}
+	
+	.morelink {
+		width: 132px !important;
+		border: 1px solid @color-spitfire1-darker;
+		
+		.side-fancy-button-bg();
+		
+		&:hover {
+			.side-fancy-button-hover-bg();
+		}
+		
+		a {
+			font-size: 18px;
+			letter-spacing: 0.01em;
+			color: @submit-color !important;
+		}
+		
+		.nub {
+			background: none;
+		}
+	}
+	
+	&.submit-link {
+		padding: 8px 8px 8px 9px;
+	}
+	
+	&.submit-text {
+		float: right;
+		position: relative;
+		margin-top: -51px;
+		margin-right: 10px;
+	}
+	
+	// Disabled submit buttons
+	&.disabled {
+		.morelink {
+			display: none;
+		}
+		
+		.spacer {
+			padding: 8px 12px;
+			
+			background-color: @tabs-bg !important;
+		}
+		
+		.subtitle {
+			margin: 0;
+			
+			font-size: 0;
+			
+			&:after {
+				content: @submit-flood-warning;
+				font-size: 14px;
+				color: rgb(229, 34, 34);
+				text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+			}
+		}
+	}
+	
+	// Submit button rules warning
+	body:not(.subscriber) &.submit-text::after {
+		content: @submit-rules-warning;
+		display: block;
+		width: 263px;
+		height: 30px;
+		position: absolute;
+		top: -9px;
+		left: -156px;
+		
+		padding: 9px 2px 9px 35px;
+		
+		background-color: rgb(28, 43, 57, 0.88);
+		
+		text-align: center;
+		color: rgb(230, 230, 230);
+		font-size: 12px;
+		text-shadow: 1px 1px 1px black;
+		
+		transition: opacity @transition-time linear (@transition-time + 0.05s), top @transition-time linear (@transition-time + 0.05s);
+	}
+	
+	body:not(.subscriber) &.submit-text::before {
+		content: "";
+		display: block;
+		width: 24px;
+		height: 24px;
+		position: absolute;
+		top: 3px;
+		left: -145px;
+		z-index: 2;
+		
+		background-image: url(%%lock%%);
+		
+		transition: transform @transition-time linear, top @transition-time linear (@transition-time + 0.05s);
+	}
+}
+
+// Hide submit button rules warning
+.spacer:hover + .spacer > .submit-text::before, .submit-text:hover::before,
+.spacer:focus + .spacer > .submit-text::before, .submit-text:focus::before {
+	transform: rotateZ(-90deg);
+	top: -38px !important;
+}
+
+.spacer:hover + .spacer > .submit-text::after, .submit-text:hover::after,
+.spacer:focus + .spacer > .submit-text::after, .submit-text:focus::after {
+	opacity: 0;
+	top: -46px !important;
+}
+
+// Bottom boxes
+.icon-menu a {
+	background: none;
+}
+
+// Create subreddit button
+.sidebox.create {
+	margin: 0 @content-padding 20px @content-padding;
+	
+	background-color: transparent !important;
+	border-radius: 0 !important;
+	
+	transition: border-color @transition-time ease;
+	
+	.morelink {
+		.side-fancy-button-bg();
+		
+		&:hover {
+			.side-fancy-button-hover-bg();
+		}
+		
+		a {
+			.side-fancy-button-text(17px);
+		}
+		
+		.nub {
+			display: none;
+		}
+	}
+	
+	.spacer {
+		display: none;
+	}
+}
+
+// Subscribe hover thing
+.hover-bubble.multi-selector {
+	@bg: fade(@color-dark-gray, 90%);
+	
+	background-color: @bg;
+	border: 1px solid @color-blue;
+	
+	&.anchor-right.anchor-right:before,
+	&.anchor-left.anchor-right:before {
+		border-left-color: @color-blue;//rgba(14, 137, 204, 0.6);
+	}
+
+	&.anchor-right.anchor-right:after,
+	&.anchor-left.anchor-right:after {
+		border-left-color: @bg;
+	}
+	
+	strong {
+		color: @color-blue;
+	}
+	
+	label {
+		color: @color-white;
+		
+		&:hover {
+			background-color: @bg;
+		}
+	}
+	
+	.create-multi input.multi-name {
+		background-color: @bg;
+		border-color: @color-blue;
+		
+		color: @color-white;
+	}
+}

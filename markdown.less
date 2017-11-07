@@ -1,0 +1,48 @@
+//****************
+// Comment faces *
+//****************
+
+/* TODO */
+
+//**************************
+// Markdown-based features *
+//**************************
+
+// Spoiler Tag
+// Stolen from r/Anime
+a[href$="/s"], a[href$="#s"] {
+    background: #000000;
+    color: #fff !important;
+    padding: 1px 0 1px 3px;
+    cursor: text;
+    border-radius: 2px;
+
+    &:hover {
+        color: #f44 !important;
+    }
+
+    &::after {
+        content: attr(title);
+        color: #000;
+        padding: 0 10px;
+    }
+
+    &:hover::after {
+        color: #fff;
+    }
+}
+
+
+// AutoWikibot hover to display by /u/Dropping_fruits
+.comment .md h5+h6+h4+p,.comment .md h5+h6+h4+p+hr,.comment .md h5+h6+h4+p+hr+blockquote,.comment .md h5+h6+h4+p+hr+blockquote+hr,.comment .md h5+h6+h4+p+hr+blockquote+hr+p,.comment .md h5+h6+h4+p+hr+blockquote+hr+p+p {
+	display: none;
+}
+.comment .md:hover h5+h6+h4+p,.comment .md:hover h5+h6+h4+p+hr,.comment .md:hover h5+h6+h4+p+hr+blockquote,.comment .md:hover h5+h6+h4+p+hr+blockquote+hr,.comment .md:hover h5+h6+h4+p+hr+blockquote+hr+p,.comment .md:hover h5+h6+h4+p+hr+blockquote+hr+p+p {
+	display: block;
+}
+.comment .md h5+h6+h4:after {
+	content: "AutoWikibot post. Hover to view.";
+}
+.comment .md:hover h5+h6+h4:after {
+	content: "";
+}

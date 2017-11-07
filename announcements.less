@@ -1,0 +1,37 @@
+@import (reference) "style";
+
+.side .md
+{
+	& > p > strong {
+		width: 15%;
+		position: absolute;
+		top: @srbar-height + @content-padding;
+		left: @content-padding;
+		z-index: 99;
+		
+		background-color: rgba(0, 0, 0, 0.8);
+		border: 1px solid rgb(200, 0, 0);
+		outline: 1px solid black;
+		
+		> a {
+			display: block;
+			//width: 278px;
+			//max-width: 278px;
+			width: unset;
+			
+			padding: 10px;
+			
+			background: none;
+			
+			text-align: center;
+			color: rgb(200, 0, 0);
+			text-shadow: 1px 1px 1px black;
+			
+			transition: color 0.1s linear;
+			
+			&:hover {
+				color: rgb(236, 236, 236);
+			}
+		}
+	}
+}

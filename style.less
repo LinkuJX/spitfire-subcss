@@ -1,0 +1,212 @@
+/****************
+* Reddit values *
+****************/
+
+@spacer-margin-top: 7px;
+@spacer-margin-bottom: 12px;
+
+/***************
+* Construction *
+***************/
+
+@content-padding: 10px;
+@search-padding: 6px;
+
+// Widths
+@side-width: 300px;
+@side-border-space: 1px;
+
+@content-padding-total: @content-padding * 2;
+@consumed-content-width: @side-width + @side-border-space + @content-padding-total * 2;
+@content-width: calc(~"100% - @{consumed-content-width}");
+@tabs-width: calc(~"100% - @{content-padding-total}");
+@tabs-form-width: calc(~"100% - @{content-padding-total} - @{content-padding}");
+
+@search-width: @side-width - @search-padding * 2;
+
+// Heights
+@srbar-height: 18px;
+@userbar-height: 27px;
+@header-height: 180px;
+@tabs-height: 40px;
+
+@search-height: @tabs-height - @search-padding * 2;
+
+// Positions
+@tabs-top: @srbar-height + @header-height;
+
+/********
+* Style *
+********/
+
+// Images
+@logo-img: "images/header-logo.png";
+@promo-img: "images/promo.png";
+@arrow-img: "images/arrows_top.png";
+
+// Fonts
+@header-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+// General
+@font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@transition-time: 0.15s;
+
+//@color-blue: rgb(0, 150, 255);
+@color-blue: rgb(0, 130, 240);
+@color-dark-gray: rgb(22, 22, 22);
+@color-gray: lighten(@color-dark-gray, 8%);
+@color-lighter-gray: rgb(200, 200, 200);
+@color-light-gray: rgb(150, 150, 150);
+@color-light-gray-faded: rgba(150, 150, 150, 0.18);
+@color-notsowhite: rgb(215, 215, 215);
+@color-white: rgb(246, 246, 246);
+@color-superwhite: rgb(252, 252, 252);
+@color-black: rgb(5, 5, 5);
+@color-red: rgb(240, 50, 50);
+@color-orange: rgb(240, 113, 50);
+@color-spitfire1: rgb(89, 203, 232);
+@color-spitfire1-darker: rgb(64, 149, 170);
+@color-spitfire2: rgb(28, 43, 57);
+@color-spitfire2-darker: rgb(15, 22, 29);
+@color-spitfire2-lighter: rgb(45, 70, 92);
+@color-spitfire3: rgb(255, 130, 0);
+@color-spitfire-body: rgb(29, 45, 60);
+
+// Background
+@bg-color: @color-spitfire-body;
+@bg-dynamic: false;
+
+// Subreddit bar
+@srbar-bg: @color-spitfire2-lighter;
+@srbar-border: @color-gray;
+@srbar-color: @color-light-gray;
+@srbar-alt-color: @color-blue;
+
+// Tab bar
+@tabs-bg: @color-dark-gray;
+@tabs-color: @color-light-gray-faded;
+@tabs-selected-color: @color-white;
+
+// Content
+@content-bg: fade(@color-white, 96%);
+@content-border-color: @color-gray;
+
+@content-shadow-color: fade(black, 40%);
+
+@content-text-bg: @color-superwhite;
+@content-text-border: @color-light-gray;
+
+@report-color: rgb(240, 100, 100);
+
+//@moderator-color: rgb(34, 136, 34);
+@moderator-color: @color-spitfire1-darker;
+@submitter-color: rgb(0, 85, 223);
+@admin-color: red;
+
+@downvote-opacity: 0.5;
+
+// Links
+@link-color: @color-blue;
+@link-hover-color: lighten(@link-color, 10%);
+@link-visited-color: darken(@color-light-gray, 10%);
+
+@sticky-color: @moderator-color;
+@sticky-hover-color: lighten(@sticky-color, 10%);
+@sticky-visited-color: @sticky-color;
+@sticky-bg: tint(@moderator-color, 94%);
+
+@sticky-separator-top: fade(darken(@content-bg, 15%), 50%);
+@sticky-separator-bot: fade(lighten(@content-bg, 15%), 50%);
+
+@thumbnail-spoiler-blur: 4px;
+
+// Comments
+@comment-lvl1-bg: @content-text-bg;
+@comment-lvl2-bg: @color-white;
+
+@comment-border: lighten(@color-light-gray, 20%);
+@comment-hover-border: @color-light-gray;
+
+// Sidebar
+@side-bg: @color-spitfire2-darker;
+@side-border-color: @color-gray;
+@side-color: @color-light-gray;
+@side-highlight-color: @color-white;
+@side-padding: 8px;
+
+@side-header-bg: @color-dark-gray;
+@side-header-color: lighten(@color-light-gray, 20%);
+@side-header-size: 24px;
+@side-header-height: 1.5em;
+
+@side-md-top-margin: @side-padding + 6px;
+
+@side-field-bg: @side-bg;
+@side-field-border: lighten(@side-field-bg, 10%);
+@side-field-color: @color-light-gray;
+
+@side-button-bg: lighten(@events-bg, 2%);
+@side-button-bg-hover: lighten(@events-bg, 8%);
+@side-button-border-color: @side-border-color;
+@side-button-color: @color-blue;
+@side-button-color-hover: lighten(@side-button-color, 15%);
+
+// Submit buttons
+//@submit-bg: rgb(85, 54, 33);
+//@submit-color: rgb(202, 181, 162);
+@submit-bg: @color-spitfire2;
+@submit-border: @submit-bg;
+@submit-color: @color-lighter-gray;
+@submit-hover-border: @color-blue;
+@submit-hover-color: @color-blue;
+
+// Announcments
+//TODO
+
+// Events
+@events-bg: @color-spitfire2;
+@events-bg-alt: @side-button-bg;
+@events-bg-hover: @side-button-bg-hover;
+@events-border-color: @side-border-color;
+
+@events-color: @color-light-gray;
+@events-link-color: @side-button-color;
+
+// Mod stuff
+@mod-remove-bg: rgb(206, 238, 252);
+//@mod-buttons-color: rgb(170, 170, 170);
+@mod-remove-color: rgb(240, 100, 100);
+@mod-approve-color: rgb(100, 220, 100);
+
+// Modes
+@np-bg: rgb(160, 0, 0);
+@np-color: @color-white;
+@np-font-size: 14px;
+
+/*******
+* Text *
+*******/
+
+@side-user-text: "planes in the hangar";
+@side-online-text: "planes taking off";
+
+@downvote-message: "off-topic or does not contribute to discussion";
+@no-results-message: "You are in an empty airspace :(";
+@spoilers-message: "Hidden for spoilers";
+
+@submit-flood-warning: "Submissions are temporarily disabled to prevent excessive flooding.";
+@submit-rules-warning: "Please read subreddit rules before posting. Subscribe or hover to dismiss.";
+
+@submit-type-select-message: "Remember to choose the correct post type!";
+@submit-type-select-link-message: "Images must NOT be submitted as links.";
+@submit-text-message: "You are submitting a text-based post. Please mind the rules, otherwise we'll have to wipe your memory...";
+@edit-text-message: "Warning: Edits are not outside the jurisdiction of the rules.";
+
+@np-message: "NP links is not a way to evade bridgading. Please subscribe before participating.";
+
+/********************
+* Media query stuff *
+********************/
+
+@screen-lg: 1200px;
+@screen-md: 992px;

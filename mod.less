@@ -1,0 +1,68 @@
+@import (reference) "style";
+
+// Removed things
+.thing.spam,
+div.thing.comment div.child div.thing.comment.spam,
+div.thing.comment div.child div.thing.comment div.child .comment div.comment.spam {
+    background-color: @mod-remove-bg !important;
+    background-image: none !important;
+}
+
+.comment.spam > .child {
+    // Fixes ugly white coloring with nested removed comments
+    background-color: transparent;
+}
+
+// Mod buttons
+.entry .buttons {
+	.remove-button a {
+		color: @mod-remove-color !important;
+		
+		&:hover {
+			color: saturate(@mod-remove-color, 25%) !important;
+		}
+	}
+	
+	.approve-button a{
+		color: @mod-approve-color !important;
+		
+		&:hover {
+			color: saturate(@mod-approve-color, 25%) !important;
+		}
+	}
+}
+
+// Report reasons
+.thing .report-reasons {
+    padding: 4px 0;
+}
+
+.thing .buttons li.reported-stamp,
+.thing .report-reasons li {
+	color: black;
+	opacity: 1;
+}
+
+// CSS page
+#subreddit-stylesheet .sheets {
+    margin-right: 0;
+}
+
+#image-preview-list {
+    overflow: auto;     // Clear float and get ul to fit to its content
+}
+
+//**********
+// Toolbox *
+//**********
+
+.mod-toolbox .menuarea.modtools {
+    margin-right: 0 !important;
+}
+
+.tb-dt-bg-#ED4337,
+.tb-dt-bg-#0082FF {
+    a {
+        color: white;
+    }
+}

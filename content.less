@@ -1,0 +1,490 @@
+@import (reference) "style";
+
+body > .content,
+.modtools-page > div.content {
+	width: @content-width;
+	
+	margin: (@tabs-height - 1px) 0 0 @content-padding;
+	padding: @content-padding;
+	
+	font-family: @font-family;
+
+	background-color: @content-bg;
+	
+	.rounded {
+		border-radius: 0;
+	}
+}
+
+#siteTable {
+	position: relative;
+}
+
+// Links
+
+@sticky-gap: 14px + @content-padding;
+
+.link.last-clicked {
+	border: none;
+}
+
+.thing.link {
+	margin-bottom: @content-padding !important;
+	padding: 0 0 @content-padding 0 !important;
+	
+	border-bottom: 1px solid darken(@content-bg, 5%);
+	
+	.rank {
+		display: none;
+	}
+	
+	.thumbnail {
+		&.default {
+			background-image: url(%%link-thumbnail%%);
+			background-position: center;
+		}
+		&.self {
+			background-image: url(%%default-thumbnail%%);
+			background-position: center;
+		}
+		&.spoiler {
+			background-image: url(%%spoiler-thumbnail%%);
+			background-position: center;
+		}
+	}
+	
+	.title {
+		font-size: large;
+		
+		a.title {
+			color: @link-color !important;
+		}
+		
+		&.visited a.title,
+		a.title:visited {
+			color: @link-visited-color !important;
+		}
+		
+		a.title:hover {
+			color: @link-hover-color !important;
+		}
+	}
+	
+	.domain {
+		visibility: hidden;
+		
+		a {
+			visibility: visible;
+			padding: 0px 2px;
+			
+			background-color: inherit;
+			border-radius: 2px;
+		}
+	}
+	
+	.author {
+		color: @link-color;
+	}
+	
+	// Self posts
+	&.self {
+		.expando .md {
+			background-color: @content-text-bg;
+			border-color: @content-text-border;
+			border-radius: 0;
+		}
+	}
+	
+	// Stickies
+	&.stickied {
+		position: relative;
+		
+		margin-bottom: @sticky-gap !important;
+		padding-top: @content-padding !important;
+		
+		background: radial-gradient(ellipse farthest-corner at bottom, @sticky-bg 0, @color-white 100%);
+		border: 1px solid fade(@sticky-color, 20%);
+		
+		+ .clearleft + .stickied {
+			margin-top: -@sticky-gap;
+			
+			background: radial-gradient(ellipse farthest-corner at top, @sticky-bg 0, @color-white 100%);
+			border-top: none;
+		}
+		
+		// Internals
+		
+		.midcol,
+		.domain {
+			display: none;
+		}
+		
+		.thumbnail {
+			height: 50px;
+			
+			background: url(%%sticky-thumbnail%%) no-repeat center;
+			
+			img {
+				display: none;
+			}
+		}
+		
+		p.title {
+			margin-bottom: 5px;
+			
+			a.title {
+				color: @sticky-color !important;
+				font-size: 18px;
+				font-weight: normal;
+				
+				&:hover {
+					color: @sticky-hover-color !important;
+				}
+			}
+		}
+		
+		// Bottom separator
+		
+		+ .clearleft {
+			position: absolute;
+			left: 0;
+			right: 0;
+			
+			margin-top: -@sticky-gap / 2;
+			
+			border-top: 1px solid @sticky-separator-top;
+			border-bottom: 1px solid @sticky-separator-bot;
+		}
+	}
+	
+	.stickied-tagline {
+		color: @color-light-gray;
+	}
+	
+	// Edit warning
+	.post-submitter & .usertext-edit .md::before {
+		content: @edit-text-message;
+		display: block;
+		margin-bottom: 4px;
+		
+		color: @color-red;
+		font-size: 14px;
+		font-weight: bold;
+	}
+}
+
+// Comments
+
+.comment {
+	background-color: @comment-lvl1-bg !important;
+}
+.comment .comment {
+	background-color: @comment-lvl2-bg !important;
+}
+
+.generate-comment-bgs(11);
+.generate-comment-bgs(@max-i; @i: 1) when (@i <= @max-i) {
+	.comment when (@i <= 2) {
+		.generate-comment-bgs(@max-i; @i + 1);
+	}
+	.comment when (@i > 2) and (mod(@i, 2) = 0) {
+		&:extend(.comment .comment);
+		.generate-comment-bgs(@max-i; @i + 1);
+	}
+	.comment when (@i > 2) and (mod(@i, 2) = 1) {
+		&:extend(.comment);
+		.generate-comment-bgs(@max-i; @i + 1);
+	}
+}
+
+.thing.comment {
+	padding: 5px;
+	margin: 0 5px 5px 10px;
+	
+	border-radius: 2px !important;
+	border: 1px solid @comment-border !important;
+	
+	&:hover {
+		border-color: @comment-hover-border !important;
+	}
+	
+	.child {
+		border-left: none;
+	}
+	
+	body:not(.moderator) & .report-button a {
+		color: @report-color;
+	}
+}
+
+.commentarea {
+	.panestack-title {
+		margin: 2px @content-padding;
+	}
+	
+	.usertext-edit {
+		textarea {
+			background-image: url(%%comment-msg%%);
+			
+			&:focus {
+				background-image: none;
+			}
+		}
+	}
+}
+
+// General
+
+.infobar {
+	margin-right: 0;
+}
+
+.thing {
+	.buttons {
+		li {
+			&.reply-button a,
+			a.comments {
+				color: @color-blue !important;
+			}
+		}
+	}
+	
+	.tagline a.author {
+		&.submitter {
+			background-color: @submitter-color !important;
+			color: @color-white !important;
+			padding: 0 2px;
+		}
+		
+		&.moderator {
+			background-color: @moderator-color !important;
+			color: @color-white !important;
+			padding: 0 2px;
+		}
+		
+		&.admin {
+			background-color: @admin-color !important;
+			color: @color-white !important;
+			padding: 0 2px;
+		}
+	}
+}
+
+// When nothing shows up
+#noresults {
+	position: relative;
+	margin: 0 10px 10px;
+	padding: 8px;
+	
+	@bgc: darken(@content-bg, 10%);
+	background-color: @bgc;
+	color: @bgc;
+	
+	&:after {
+		content: @no-results-message;
+		position: absolute;
+		top: 8px;
+		left: 16px;
+		
+		color: @color-spitfire2-lighter;
+	}
+}
+
+// Arrows
+
+.link {
+	@midcol-w: 40px;
+	
+	.midcol {
+		width: @midcol-w !important;
+		
+		margin-left: 0;
+	}
+	
+	.score {
+		width: @midcol-w - 1px;
+		
+		color: @color-light-gray;
+
+		&.dislikes {
+			color: @color-spitfire2;
+		}
+
+		&.likes {
+			color: @color-spitfire3;
+		}
+	}
+}
+
+.comment .midcol {
+	width: 20px;
+	z-index: 1;
+}
+
+.gadget .midcol:extend(.comment .midcol) {
+	margin-right: 4px;
+}
+
+@arrow-width: image-width(@arrow-img) / 3;
+@arrow-height: image-height(@arrow-img) / 2;
+
+.midcol {
+	.arrow {
+		width: @arrow-width;
+		height: @arrow-height;
+		position: relative;
+		
+		background-image: url(%%arrows-bot%%) !important;
+		
+		&::after {
+			content: "";
+			width: @arrow-width;
+			height: @arrow-height;
+			position: absolute;
+			
+			background-image: url(%%arrows-top%%) !important;
+		}
+	}
+
+	.arrow.up {
+		background-position: 0 0 !important;
+		
+		&::after {
+			background-position: 0 0 !important;
+			
+			bottom: 0;
+			transition: bottom @transition-time ease;
+		}
+		
+		&:hover {
+			background-position: -@arrow-width 0 !important;
+			
+			&::after {
+				background-position: -@arrow-width 0 !important;
+				bottom: 2px;
+			}
+		}
+	}
+
+	.arrow.down {
+		margin-bottom: 2px;
+		
+		background-position: 0 -@arrow-height !important;
+		opacity: @downvote-opacity;
+		
+		&::after {
+			background-position: 0 -@arrow-height !important;
+			
+			top: 0;
+			transition: top @transition-time ease;
+		}
+		
+		&:hover {
+			background-position: -@arrow-width -@arrow-height !important;
+			opacity: 1.0;
+			
+			&::after {
+				background-position: -@arrow-width -@arrow-height !important;
+				top: 2px;
+			}
+		}
+	}
+
+	.arrow.upmod {
+		@x: -(@arrow-width * 2);
+		
+		background-position: @x 0 !important;
+		
+		&::after {
+			background-position: @x 0 !important;
+			bottom: 2px;
+		}
+	}
+
+	.arrow.downmod {
+		@x: -(@arrow-width * 2);
+		
+		margin-bottom: 2px;
+		
+		background-position: @x -@arrow-height !important;
+		
+		&::after {
+			background-position: @x -@arrow-height !important;
+			top: 2px;
+		}
+	}
+}
+
+// Downvote message
+.comment .arrow.down::before {
+	content: @downvote-message;
+	display: block;
+	width: 250px;
+	line-height: 12px;
+	position: relative;
+	top: -2px;
+	left: -1px;
+	z-index: -1;
+	
+	padding: 3px 3px 3px 24px;
+	
+	background-color: black;
+	border: 1px solid gray;
+	border-radius: 2px;
+	color: white;
+	
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity @transition-time linear;
+}
+
+.comment .arrow.down:hover::before {
+	visibility: visible;
+	opacity: 0.9;
+}
+
+// Submit page
+
+.submit-page {
+	.submit {
+		.spacer {
+			margin: 0;
+		}
+		
+		.roundfield {
+			margin: (@content-padding / 2) 0;
+			
+			background-color: @content-text-bg;
+			border: 1px solid @content-text-border;
+			border-radius: 0;
+		}
+	}
+	
+	.formtabs-content {
+		display: flex;
+		flex-flow: column nowrap;
+		
+		border-top: 2px solid @color-gray !important;
+		
+		:not(.res) :nth-child(6),
+		.res & :nth-child(7) {
+			order: -1;
+		}
+	}
+	
+	.submit_text {
+		max-height: 380px;
+		
+		ol, ul {
+			margin-left: 0;
+		}
+		
+		h1 {
+			display: none;
+		}
+	}
+	
+	#image-field {
+		display: none;
+	}
+}

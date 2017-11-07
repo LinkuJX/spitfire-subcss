@@ -1,0 +1,286 @@
+@import (reference) "style-darkmode";
+@import (reference) "sidebar";
+
+// Variables
+@darkmode-selector: ~"html:lang(dd)";
+//@darkmode-selector: ~"html[lang$='d']";
+@nightmode-selector: ~"html.res-nightmode";
+
+//*************************
+// Darkmode and nightmode *
+//*************************
+
+.dark-tagline {
+	color: @dark-tagline-color;
+}
+
+@{darkmode-selector}, @{nightmode-selector} {
+	body > .content {
+		background-color: @dark-content-bg;
+		border-right: 1px solid @tabs-bg;
+	}
+	
+	.content .md {
+		color: @dark-content-text-color;
+		
+		h1 {
+			color: @color-white;
+		}
+		
+		h2 {
+			color: @color-light-gray;
+		}
+		
+		pre {
+			background-color: @color-black;
+			border-color: @dark-content-text-border;
+		}
+		
+		code {
+			color: @color-light-gray;
+		}
+	}
+	
+	#noresults {
+		background-color: @color-dark-gray;
+		color: @color-dark-gray;
+	}
+	
+	// General
+	.arrow {
+		width: 20px !important;
+		height: 16px !important;
+		margin-top: 2px;
+		
+		background-image: url(%%arrows-bot-dark%%) !important;
+		
+		&::after {
+			background-image: url(%%arrows-top-dark%%) !important;
+		}
+	}
+	
+	// Links
+	.entry .tagline,
+	.entry .buttons li a,
+	.entry time {
+		&:extend(.dark-tagline);
+	}
+	
+	.thing.link {
+		border-color: darken(@dark-content-bg, 20%);
+		
+		&.self {
+			.expando .md {
+				background-color: @dark-content-text-bg;
+				border-color: @dark-content-text-border;
+			}
+		}
+		
+		&.stickied {
+			background: radial-gradient(ellipse farthest-corner at bottom, @dark-sticky-bg 0, @color-black 100%);
+			border-color: fade(@sticky-color, 20%);
+			
+			+ .clearleft + .stickied {
+				background: radial-gradient(ellipse farthest-corner at top, @dark-sticky-bg 0, @color-black 100%);
+			}
+			
+			.title {
+				a.title {
+					color: @dark-sticky-color  !important;
+				}
+			}
+
+			.thumbnail {
+				height: 50px;
+				
+				background: url(%%sticky-thumbnail-dark%%) no-repeat center !important;
+				
+				img {
+					display: none;
+				}
+			}
+			
+			+ .clearleft {
+				border-top-color: @dark-sticky-separator-top;
+				border-bottom-color: @dark-sticky-separator-bot;
+			}
+		}
+		
+		.stickied-tagline {
+			color: @dark-tagline-color;
+		}
+		
+		.thumbnail {
+			&.default {
+				background-image: url(%%link-thumbnail-dark%%);
+				background-position: center;
+			}
+			&.self {
+				background-image: url(%%default-thumbnail-dark%%);
+				background-position: center;
+			}
+			&.spoiler {
+				background-image: url(%%spoiler-thumbnail-dark%%);
+				background-position: center;
+			}
+		}
+		.domain a:extend(.dark-tagline) {}
+	}
+	
+	// Link flair
+	.thing.link {
+		.linkflair-spoiler {
+			.thumbnail {
+				background-image: url(%%spoiler-thumbnail-dark%%);
+			}
+			
+			//.linkflairlabel {
+			//	color: ;
+			//}
+		}
+	}
+	
+	// Comments
+	.comments-page .commentarea {
+		.generate-comment-bgs(11);
+		.generate-comment-bgs(@max-i; @i: 1) when (@i <= @max-i) {
+			.comment when (mod(@i, 2) = 0) {
+				&:extend(.dark-comment2);
+				.generate-comment-bgs(@max-i; @i + 1);
+			}
+			.comment when (mod(@i, 2) = 1) {
+				&:extend(.dark-comment);
+				.generate-comment-bgs(@max-i; @i + 1);
+			}
+		}
+		
+		textarea {
+			background-color: @color-black;
+			border-color: @color-dark-gray;
+			
+			color: @dark-comment-input-color;
+		}
+		
+		.panestack-title {
+			border-color: @color-dark-gray;
+			color: @color-gray;
+		}
+	}
+	
+	.thing.comment,
+	&.res-commentBoxes.res-commentBoxes-rounded .content .thing.comment {
+		border-color: @dark-content-text-border !important;
+		
+		&:hover {
+			border-color: @dark-content-text-border !important;
+		}
+	}
+	
+	.comment {
+		&:extend(.dark-comment);
+		
+		span.score {
+			color: @color-light-gray;
+		}
+	}
+	
+	// Highlighted comment after clicking "permalink"
+	.usertext.border .usertext-body {
+		background-color: lighten(@dark-content-text-bg, 5%);
+	}
+	
+	.submit-page {
+		.content h1 {
+			color: @dark-content-header-color;
+		}
+		
+		.submit .roundfield {
+			background-color: @dark-content-text-bg;
+			border-color: @dark-content-text-border;
+			
+			color: @dark-content-text-color;
+		}
+		
+		textarea,
+		input[type="text"] {
+			.side-dark-textfield();
+		}
+	}
+	
+	// RES stuff
+	.NERPageMarker {
+		border-color: @dark-content-bg;
+	}
+}
+
+.dark-comment {
+	background-color: @dark-comment-lvl1-bg !important;
+}
+.dark-comment2 {
+	background-color: @dark-comment-lvl2-bg !important;
+}
+
+//****************
+// RES nightmode *
+//****************
+
+.nightmode-bg-fix() {
+	background-color: transparent !important;
+}
+
+@{nightmode-selector} {
+	ol,
+	#header,
+	#header-bottom-left,
+	//:not([class*="-page"]) .content[role="main"],
+	.listing-page .link,
+	.icon-menu a,
+	.side blockquote ul,
+	.side .leavemoderator,
+	.side .leavecontributor-button,
+	.sidebox,
+	.sidecontentbox .content,
+	.titlebox,
+	.titlebox form.flairtoggle,
+	#newlink,
+	.linkflairlabel,
+	.listing-page .sitetable > div:nth-of-type(4n+1) {
+		.nightmode-bg-fix();
+	}
+	
+	h1 {
+		border: none;
+	}
+	
+	.side {
+		* {
+			color: inherit;
+		}
+		
+		blockquote {
+			background: none;
+		}
+	}
+	
+	.arrow.up, .arrow.up:hover,
+	.arrow.down, .arrow.down:hover,
+	.arrow.upmod, .arrow.upmod:hover,
+	.arrow.downmod, .arrow.downmod:hover {
+		background-image: url(%%arrows-bot-dark%%) !important;
+	}
+	
+	.arrow.up:extend(.midcol .arrow.up all) {}
+	.arrow.down:extend(.midcol .arrow.down all) {}
+	.arrow.upmod:extend(.midcol .arrow.upmod all) {}
+	.arrow.downmod:extend(.midcol .arrow.downmod all) {}
+}
+
+// Importants applied:
+// .tabmenu li a: background, color, hover color
+// .side: border-right, border-bottom
+// .side-dark-textfield(): background-color
+// #searchexpando: border-color
+// .linkinfo (and all its subelement colors)
+// .titlebox
+//   .leavemoderator
+//   .tagline

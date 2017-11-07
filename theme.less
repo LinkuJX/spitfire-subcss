@@ -1,0 +1,142 @@
+/*!
+* Hello!
+* This theme was compiled from LESS and based on the r/leagueoflegends stylesheet. 
+* You can find that version here:
+* https://github.com/LinkuJX/spitfire-subcss
+*
+* Thumbnail graphics are from Font Awesome by Dave Gandy:
+* http://fontawesome.io
+*
+* To /r/LondonSpitfire mods:
+*   Do not modify this stylesheet or upload images; changes will be automagically reverted.
+*/
+
+@import (reference) "style";
+
+//*******
+// Page *
+//*******
+
+body {
+	color: @color-spitfire2;
+
+	background-color: @bg-color !important;
+	& when (@bg-dynamic = true) {
+		background-attachment: fixed;
+	}
+}
+
+a,
+.tagline a,
+html.res-nightmode .res-nightmode a,
+html.res-nightmode .res-nightmode a.option {
+	color: @color-blue;
+}
+
+textarea {
+	border: 1px solid rgb(211, 211, 211);
+}
+
+.link-transition {
+	transition: color @transition-time ease;
+	text-decoration: none !important;
+}
+
+//***************
+// Page content *
+//***************
+
+@import "header";
+@import "content";
+@import "sidebar";
+@import "announcements";
+@import "events";
+
+//#baconBit {
+	//TODO
+//}
+
+// Footer
+.footer {
+	background: none;
+	border: none;
+	border-radius: 0;
+}
+
+//********
+// Modes *
+//********
+
+// We don't like NP, so we'll complain about it to the user.
+html:lang(np) {
+	div.content::before {
+		content: @np-message;
+		display: block;
+		
+		margin-bottom: @content-padding;
+		padding: @content-padding;
+		
+		background-color: @np-bg;
+		border: 1px solid black;
+		outline: 1px solid @np-bg;
+		
+		color: @np-color;
+		font-size: @np-font-size;
+	}
+}
+
+/*html:lang(sf),
+html:lang(sd) {
+	.thing.link.over18 {
+		.midcol,
+		.thumbnail,
+		.entry {
+			display: none;
+		}
+		
+		&::before {
+			content: @spoilers-message;
+			
+			margin-left: @content-padding;
+			
+			color: darken(red, 10%);
+			font-size: 14px;
+			font-style: italic;
+		}
+	}
+}*/
+
+html:lang(sf) {
+	.link.linkflair-spoiler {
+		.midcol,
+		.thumbnail,
+		.entry {
+			display: none;
+		}
+		
+		&::before {
+			content: @spoilers-message;
+			
+			margin-left: @content-padding;
+			
+			color: darken(red, 10%);
+			font-size: 14px;
+			font-style: italic;
+		}
+	}
+}
+
+//***********
+// Includes *
+//***********
+
+@import "markdown";
+@import "mod";
+@import "res-fixes";
+@import "darkmode";
+
+@import "flair";
+@import "animations";
+
+/*# AUTO-GENERATED AFTER THIS POINT - DO NOT EDIT #*/
+
