@@ -39,23 +39,24 @@ body > .content,
 	}
 	
 	.thumbnail {
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: contain;
+
 		&.default {
 			background-image: url(%%link-thumbnail%%);
-			background-position: center;
 		}
 		&.self {
 			background-image: url(%%default-thumbnail%%);
-			background-position: center;
 		}
 		&.spoiler {
 			background-image: url(%%spoiler-thumbnail%%);
-			background-position: center;
 		}
 	}
 	
 	.title {
 		font-size: large;
-		
+
 		a.title {
 			color: @link-color !important;
 		}
