@@ -23,3 +23,101 @@
         }
     }
 }
+
+//*************
+// User Flair *
+//*************
+
+// Variables
+
+@flair-height: 22.52px;
+@flair-width: 25px;
+
+.flair {
+    min-width: @flair-width;
+    height: @flair-height;
+    line-height: 22px;
+    vertical-align: middle;
+    padding: 0;
+    margin: 0 2px 0 0;
+    background-color: transparent !important;
+    border: none;
+    border-radius: 2px;
+    font-size: 0 !important;
+    overflow: hidden;
+
+    &::before {
+        content: "";
+        display: inline-block;
+        width: @flair-width;
+        height: @flair-height;
+        background-image: url(%%flairs%%);
+    }
+
+    &:not([title=""]):hover {
+        padding: 0 4px;
+        background-color: #f1f1f1 !important;
+        font-size: 11px !important;
+
+        &::before {
+            display: none;
+        }
+    }
+}
+
+// Flair Creator
+
+.make-flair-pogchamp(@name, @x, @y, @slots: 1) {
+    @selector: ~".flair-@{name}";
+    @{selector} {
+        & when (@slots =1) {
+            & when (@slots =1) {
+                &::before {
+                    background-position: -(@x * @flair-width) -(@y * @flair-height);
+                }
+            }
+            & when (@slots > 1) {
+                min-width: @flair-width * @slots;
+
+                &::before {
+                    width: @flair-width * @slots;
+                    background-position: -(@x * @flair-width) -(@y * @flair-height);
+                }
+            }
+        }
+    }
+}
+
+// Hero Flairs
+.make-flair-pogchamp("zen", 0, 0); // Zenyatta 
+.make-flair-pogchamp("widow", 0, 1); // Widowmaker 
+.make-flair-pogchamp("soldier", 0, 2); // Soldier 
+.make-flair-pogchamp("torb", 0, 3); // Torbjorn 
+.make-flair-pogchamp("mccree", 0, 4); // McCree 
+.make-flair-pogchamp("reaper", 0, 5); // Reaper 
+.make-flair-pogchamp("monkey", 0, 6); // Winston 
+.make-flair-pogchamp("pharah", 0, 7); // Pharah 
+.make-flair-pogchamp("zarya", 0, 8); // Zarya 
+.make-flair-pogchamp("rein", 0, 9); // Reinhardt
+.make-flair-pogchamp("sym", 0, 10); // Symmetra 
+.make-flair-pogchamp("bast", 0, 11); // Bastion 
+.make-flair-pogchamp("hanzo", 0, 12); // Hanzo 
+.make-flair-pogchamp("mercy", 0, 13); // Mercy 
+.make-flair-pogchamp("tracer", 0, 14); // Tracer 
+.make-flair-pogchamp("lucio", 0, 15); // Lucio 
+.make-flair-pogchamp("hog", 0, 16); // Roadhog 
+.make-flair-pogchamp("rat", 0, 17); // Junkrat 
+.make-flair-pogchamp("mei", 0, 18); // Mei 
+.make-flair-pogchamp("dva", 0, 19); // D.Va 
+.make-flair-pogchamp("ninja", 0, 20); // Genji 
+.make-flair-pogchamp("ana", 0, 21); // Ana 
+.make-flair-pogchamp("sombra", 0, 22); // Sombra 
+.make-flair-pogchamp("orisa", 0, 23); // Orisa 
+.make-flair-pogchamp("fist", 0, 24); // Doomfist 
+
+// Spitfire Flairs
+.make-flair-pogchamp("spitfire", 1, 0); // Spitfire Logo
+.make-flair-pogchamp("c9", 1, 1); // Cloud9 Logo
+.make-flair-pogchamp("c9kd", 1, 2); // Cloud9 Kongdoo Logo
+
+// Verified Flairs
