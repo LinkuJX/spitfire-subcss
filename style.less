@@ -57,7 +57,7 @@
 @color-gray: lighten(@color-dark-gray, 8%);
 @color-lighter-gray: rgb(200, 200, 200);
 @color-light-gray: rgb(150, 150, 150);
-@color-light-gray-faded: rgba(150, 150, 150, 0.18);
+@color-light-gray-faded: rgba(150, 150, 150, 0.42);
 @color-notsowhite: rgb(215, 215, 215);
 @color-white: rgb(246, 246, 246);
 @color-superwhite: rgb(252, 252, 252);
@@ -66,6 +66,7 @@
 @color-orange: rgb(240, 113, 50);
 @color-spitfire1: rgb(89, 203, 232);
 @color-spitfire1-darker: rgb(64, 149, 170);
+@color-spitfire1-faded: rgba(89, 203, 232, 0.35);
 @color-spitfire2: rgb(28, 43, 57);
 @color-spitfire2-darker: rgb(15, 22, 29);
 @color-spitfire2-lighter: rgb(45, 70, 92);
@@ -83,8 +84,8 @@
 
 // Tab bar
 @tabs-bg: @color-dark-gray;
-@tabs-color: @color-light-gray-faded;
-@tabs-selected-color: @color-white;
+@tabs-color: @color-spitfire1-faded;
+@tabs-selected-color: @color-spitfire3;
 
 // Content
 @content-bg: fade(@color-white, 96%);

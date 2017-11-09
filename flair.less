@@ -33,6 +33,9 @@
 @flair-height: 25px;
 @flair-width: 25px;
 
+
+// Flair
+
 .flair {
     min-width: @flair-width;
     height: @flair-height;
@@ -65,24 +68,83 @@
     }
 }
 
+// Verified Flairs
+
+.flair-verified-ldn {
+    &::before {
+        width: @flair-width * 3;
+        background-image: url(%%verified%%);
+        background-position: 0 0;
+    }
+
+    &:not([title=""]):hover {
+        min-width: 75px;
+        padding: 0 4px;
+        background-color: #f1f1f1 !important;
+        font-size: 11px !important;
+        text-align: center;
+
+        &::before {
+            display: none;
+        }
+    }
+}
+
+.flair-verified-c9 {
+    &::before {
+        width: @flair-width * 3;
+        background-image: url(%%verified%%);
+        background-position: 0 -25px;
+    }
+
+    &:not([title=""]):hover {
+        min-width: 75px;
+        padding: 0 4px;
+        background-color: #f1f1f1 !important;
+        font-size: 11px !important;
+        text-align: center;
+
+        &::before {
+            display: none;
+        }
+    }
+}
+
+.flair-verified-gen {
+    &::before {
+        width: @flair-width * 3;
+        background-image: url(%%verified%%);
+        background-position: 0 -50px;
+    }
+
+    &:not([title=""]):hover {
+        min-width: 75px;
+        padding: 0 4px;
+        background-color: #f1f1f1 !important;
+        font-size: 11px !important;
+        text-align: center;
+
+        &::before {
+            display: none;
+        }
+    }
+}
+
 // Flair Creator
 
 .make-flair-pogchamp(@name, @x, @y, @slots: 1) {
     @selector: ~".flair-@{name}";
     @{selector} {
         & when (@slots =1) {
-            & when (@slots =1) {
-                &::before {
-                    background-position: -(@x * @flair-width) -(@y * @flair-height);
-                }
+            &::before {
+                background-position: -(@x * @flair-width) -(@y * @flair-height);
             }
-            & when (@slots > 1) {
-                min-width: @flair-width * @slots;
-
-                &::before {
-                    width: @flair-width * @slots;
-                    background-position: -(@x * @flair-width) -(@y * @flair-height);
-                }
+        }
+        & when (@slots > 1) {
+            min-width: @flair-width * @slots;
+            &::before {
+                width: @flair-width * @slots;
+                background-position: -(@x * @flair-width) -(@y * @flair-height);
             }
         }
     }
